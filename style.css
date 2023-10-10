@@ -1,1 +1,51 @@
-
+body{
+background: #ccffee ;
+text-align: center ;
+border: 125px solid #ffe6ff;
+color: black;
+font-size: 45px
+}
+h1{
+text-align: center ;
+border: 15px dotted Azure;
+color: Azure;
+font-size: 80px
+}
+h2{
+text-align: center ;
+color: black;
+font-size: 60px
+}
+h3{
+text-align: center ;
+color: black;
+font-size: 60px
+}
+h4{
+text-align: center ;
+color: black;
+font-size: 60px
+}
+h5{
+text-align: center ;
+color: black;
+font-size: 60px
+}
+table tr td{
+border: 1px solid black;
+}
+caption { 
+border: 1px solid black;
+color:Pink;
+background: PowderBlue;
+}
+p{
+text-align: center ;
+color: black;
+font-size: 30px
+}
+caption:hover {
+background: Pink;
+border: 1px solid black;
+color:PowderBlue;
+}
