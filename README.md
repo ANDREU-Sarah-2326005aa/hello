@@ -4,7 +4,7 @@
 <title>mes mangas
 </title>
 <body>
-<link rel = 'stylesheet' href='mapage2.css'>
+<link rel = 'stylesheet' href='style.css'>
 
 <h1><STRONG>Les meilleures sorties d'animes 2020</STRONG></h1>
 <br/><br/>
