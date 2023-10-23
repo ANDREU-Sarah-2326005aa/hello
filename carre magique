@@ -1,0 +1,27 @@
+import math
+
+
+def BonneTaille (tab):
+    n = math.sqrt((len(tab)))
+    cpt = 0
+    if (n*n != len(tab)):
+        return False
+    return True
+
+def AfficherCarreMagique (tab):
+    if (not(BonneTaille(tab))):
+        return False
+    ligne = ""
+    cpt = 0
+    n = math.sqrt((len(tab)))
+    while (cpt != len(tab)):
+        for k in range (int(n)):
+            ligne += " " + str(tab[int(cpt+k)])
+        print (ligne)
+        ligne = ""
+        cpt += n
+    return True 
+    
+        
+print(AfficherCarreMagique ([8,1,6,3,5,7,4,9,2]))
+print(AfficherCarreMagique ([35,1,6,26,19,24,3,32,7,21,23,25,31,9,2,22,27,20,8,28,33,17,10,15,30,5,34,12,14,16,4,36,29,13,18,11]))
