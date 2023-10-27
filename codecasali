@@ -1,0 +1,264 @@
+#include <iostream>
+#include <string>
+#include <cctype>
+
+using namespace std;
+
+//---------------------- R101 - TD3 ----------------------
+//---------------------- Variante 1  ----------------------
+
+// fonction carDansMot
+bool carDansMot(char car) {
+    return (islower(car) || isupper(car) || isdigit(car) || car == '_');
+}
+
+//----------------------  (Caractere par caractere) ----------------------
+
+// fonction CompterNbMotsV1
+int CompterNbMotsV1(const string& chaine) {
+    int cpt = 0;
+    bool estDansLeMot = false;
+
+    for (size_t i = 0; i < chaine.size(); ++i) {
+        if (!estDansLeMot && carDansMot(chaine[i])) {
+            estDansLeMot = true;
+            cpt++;
+        } else if (estDansLeMot && !carDansMot(chaine[i])) {
+            estDansLeMot = false;
+        }
+    }
+
+    return cpt;
+}
+
+//---------------------- (Mot par mot) ----------------------
+
+// fonction CompterNbMotsV2
+int CompterNbMotsV2(const string& chaine) {
+    int cpt = 0;
+    size_t i = 0;
+
+    while (i < chaine.size() && !carDansMot(chaine[i])) {
+        i++;
+    }
+
+    if (i == chaine.size()) {
+        return cpt;
+    }
+
+    cpt++;
+
+    while (i < chaine.size() && carDansMot(chaine[i])) {
+        i++;
+    }
+
+    return cpt;
+}
+
+//------------------------- Variante 2  -------------------------
+
+// fonction DebutMot
+bool DebutMot(char car) {
+    return (islower(car) || isupper(car));
+}
+
+//----------------------  (Caractere par caractere) ----------------------
+
+// fonction CompterNbMotsV1 (variante 2)
+int CompterNbMotsV1_V2(const string& chaine) {
+    int cpt = 0;
+    bool estDansLeMot = false;
+
+    for (size_t i = 0; i < chaine.size(); ++i) {
+        if (!estDansLeMot && DebutMot(chaine[i])) {
+            estDansLeMot = true;
+            cpt++;
+        } else if (estDansLeMot && !carDansMot(chaine[i])) {
+            estDansLeMot = false;
+        }
+    }
+
+    return cpt;
+}
+
+//---------------------- (Mot par mot) ----------------------
+
+// fonction CompterNbMotsV2 (variante 2)
+int CompterNbMotsV2_V2(const string& chaine) {
+    int cpt = 0;
+    size_t i = 0;
+
+    while (i < chaine.size() && !DebutMot(chaine[i])) {
+        i++;
+    }
+
+    if (i == chaine.size()) {
+        return cpt;
+    }
+
+    cpt++;
+
+    while (i < chaine.size() && carDansMot(chaine[i])) {
+        i++;
+    }
+
+    return cpt;
+}
+
+//---------------------- Test ----------------------
+
+int main() {
+    string ligneLue;
+
+    do {
+        cout << "Entrer une ligne : ";
+        getline(cin, ligneLue);
+
+        if (ligneLue.size() == 0) {
+            break;
+        }
+
+        cout << ligneLue << endl;
+        cout << "Nombre de mots de la ligne : " << CompterNbMotsV2_V2(ligneLue) << endl;
+
+    } while (true);
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+//---------------------- R101 - TD3 ----------------------
+//---------------------- Variante 1  ----------------------
+
+fonction isLower (car : in caractere) renvoie booleen;
+debut
+    renvoie ('a' <= car ET_ALORS car <= 'z');
+fin
+
+
+fonction isUpper (car : in caractere) renvoie booleen;
+debut
+    renvoie ('A' <= car ET_ALORS car <= 'Z');
+fin
+
+
+fonction isDigit (car : in caractere) renvoie booleen;
+debut
+    renvoie ('0' <= car ET_ALORS car <= '9');
+fin
+
+
+fonction carDansMot (car : in caractere) renvoie booleen;
+debut
+    renvoie (islower (car) OU_SINON isupper(car) OU_SINON isdigit (car) OU_SINON Car vaut'_');
+fin
+
+//----------------------  (Caractere par caractere) ----------------------
+
+fonction CompterNbMotsV1 (chaine : in string) renvoie entier_naturel;
+debut
+    declarer cpt : entier_naturel <- 0;
+    declarer estDansLeMot : booleen <- faux;
+    pour (i variant_de 0 a taille (chaine) -1)
+    faire
+        si (NON(estDansLeMot) ET_ALORS carDansMot(chaine [i]))
+            estDansLeMot <- vrai;
+            cpt <- cpt + 1;
+        sinon_si (estDansLeMot ET_ALORS NON(carDansMot(chaine [i])))
+            estDansLeMot <- faux; 
+        fsi
+    ffaire
+    renvoie cpt;
+fin
+
+//---------------------- (Mot par mot) ---------------------- 
+
+
+fonction CompterNbMotsV2(chaine : in string) renvoie entier_naturel;
+    debut
+    declarer cpt : entier_naturel <- 0;
+    declarer i : entier_naturel <- 0;
+    boucle
+        tant_que ((i < taille(chaine)) ET_ALORS (NON(carDansMot(chaine [i]))))
+        faire
+            i <- i + 1;
+        ffaire
+        si (i vaut taille(chaine)) sortie;
+        cpt <- cpt + 1;
+        tant_que (i < taille(chaine) ET_ALORS carDansMot(chaine [i]))
+        faire
+            i <- i + 1;
+        ffaire
+    fboucle
+    renvoie cpt;
+fin 
+
+
+//------------------------- Variante 2  -------------------------
+
+fonction DebutMot (Car : in caractere) renvoie booleen
+debut
+renvoie (islower (Car) OU_SINON isupper(Car));
+fin
+
+//----------------------  (Caractere par caractere) ----------------------
+
+fonction CompterNbMotsV1 (chaine : in string) renvoie entier_naturel;
+debut
+    declarer cpt : entier_naturel <- 0;
+    declarer estDansLeMot : booleen <- faux;
+    pour (i variant_de 0 a taille (chaine) -1)
+    faire
+        si (NON(estDansLeMot) ET_ALORS DebutMot (chaine [i]))
+            estDansLeMot <- vrai;
+            cpt <- cpt + 1;
+        sinon_si (estDansLeMot ET_ALORS NON(carDansMot(chaine [i])))
+            estDansLeMot <- faux; 
+        fsi
+    ffaire
+    renvoie cpt;
+fin
+
+//---------------------- (Mot par mot) ---------------------- 
+
+fonction CompterNbMotsV2(chaine : in string) renvoie entier_naturel;
+    debut
+    declarer cpt : entier_naturel <- 0;
+    declarer i : entier_naturel <- 0;
+    boucle
+        tant_que ((i < taille(chaine)) ET_ALORS (NON(DebutMot(chaine [i]))))
+        faire
+            i <- i + 1;
+        ffaire
+        si (i vaut taille(chaine)) sortie;
+        cpt <- cpt + 1;
+        tant_que (i < taille(chaine) ET_ALORS carDansMot(chaine [i]))
+        faire
+            i <- i + 1;
+        ffaire
+    fboucle
+    renvoie cpt;
+fin 
+
+//---------------------- Test ----------------------
+
+algorithme ComptageDeMots
+debut
+    declarer ligneLue : string;
+    boucle
+        afficher ("Entrer une ligne : ");
+        saisir(ligneLue);
+        si (0 vaut taille(ligneLue)) sortie;
+            afficher (ligneLue);
+            ligne_suivante;
+            afficher ("Nombre de mots de la ligne :", CompterNbMotsV2(ligneLue));
+            ligne_suivante;
+    fboucle
+fin
