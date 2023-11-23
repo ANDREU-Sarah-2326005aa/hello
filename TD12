@@ -1,0 +1,145 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+// ------------- Exercice 1 : -------------
+// en utilisant le modulo
+bool estPremier (const unsigned & n){
+    for (unsigned i = 2 ; i < n; ++i){
+        if (n%i == 0)
+            return false;
+    }
+    return true;
+}
+
+vector<unsigned> generePremierPlusPetitQue (const unsigned & N){
+    vector<unsigned> premier = {};
+    for (unsigned n = 2; n < N; ++n){
+        if (estPremier(n))
+            premier.push_back(n);
+    }
+    return premier;
+}
+
+
+
+// en utilisant le crible d’Eratosthène
+vector<unsigned> cribleEratosthene (const unsigned & N){
+    vector<unsigned> premier = {};
+    vector<unsigned> nbr (N + 1 ,true);
+
+    for (size_t k = 1; k < N+1; k = k+1){
+        if (k%2 == 0)
+            nbr[k] = false;
+    }
+
+    nbr[1] = false;
+    size_t i=3;
+    while (i*i <= N){
+        if (nbr[i]){
+            for (size_t j = i*i ; j <= N ; j = j + i)
+                nbr[j] = false;
+        }
+        i=i+1;
+    }
+    return nbr;
+}
+
+vector<unsigned> generePremierPlusPetitQueV2 (const unsigned & N){
+    vector<unsigned> premier = cribleEratosthene(500);
+    vector<unsigned> premier2 = {};
+
+    for (unsigned n = 2; n < size(premier); ++n){
+        if (premier[n])
+            premier2.push_back(n);
+    }
+
+    return premier2;
+}
+
+
+// ------------- Exercice 2 : -------------
+
+void intMatrice(vector<vector<unsigned>>& matrice, const int & n) {
+    matrice.resize(n, vector<unsigned>(n, 0));
+    int milieu_i = n / 2;
+    int milieu_j = n / 2;
+    matrice[milieu_i][milieu_j] = 1;
+}
+
+void affMatrice(const vector<vector<unsigned>>& matrice) {
+    for (const auto& ligne : matrice) {
+        for (int element : ligne) {
+            cout << element << " ";
+        }
+        cout << endl;
+    }
+}
+
+void genereMatricEscargot (vector<vector<unsigned>> & mat, const unsigned & N){
+    int nbr (2);
+    size_t nLigne = N/2;
+    size_t nColonne = N/2;
+
+    for (unsigned i = 1; i < N; i += 2){
+
+        for (unsigned j = 0; j < i; ++j){
+            mat[--nLigne][nColonne] = nbr++;
+        }
+
+        for (unsigned j = 0; j < i ; ++j){
+            mat[nLigne][--nColonne] = nbr++;
+        }
+
+        for (unsigned j = 0; j < i+1; ++j){
+            mat[++nLigne][nColonne] = nbr++;
+        }
+
+
+        for (unsigned j = 0; j < i+1; ++j){
+            mat[nLigne][++nColonne] = nbr++;
+        }
+    }
+    for (unsigned j = 0; j < N-1; ++j){
+        mat[--nLigne][nColonne] = nbr++;
+    }
+}
+
+
+
+void genereMatricUlam (vector<vector<unsigned>> & mat){
+    for (size_t i = 0; i < mat.size(); ++i) {
+        for (size_t j = 0; j < mat[i].size(); ++j) {
+            if (!estPremier(mat[i][j])) {
+                mat[i][j] = 0;
+            }
+        }
+    }
+}
+
+
+int main() {
+    vector<unsigned> premier = generePremierPlusPetitQueV2(500);
+    for (size_t i = 2; i < size(premier); ++i){
+        cout << premier[i] << " " ;
+    }
+
+    cout << endl << "-----------------------" << endl;
+    unsigned N;
+    cout << "Entrez la taille de la matrice spirale : ";
+    cin >> N;
+    vector<vector<unsigned>> mat;
+    intMatrice(mat, N);
+    affMatrice(mat);
+
+    cout << "-----------------------" << endl;
+    genereMatricEscargot(mat,N);
+    affMatrice(mat);
+
+    cout << "-----------------------" << endl;
+    genereMatricUlam(mat);
+    affMatrice(mat);
+    return 0;
+}
+
