@@ -1,0 +1,214 @@
+#include <iostream>
+#include <math.h>
+#include <random>
+
+using namespace std;
+
+void exo2()
+{
+    cout << "Bonjour tout le monde ! :D" << endl;
+}
+
+void exo4()
+{
+    int k = 0;
+    for (int i = 0; i < 201; i++)
+    {
+        if (k == 10)
+        {
+            cout << endl;
+            k = 0;
+        }
+        cout << to_string(i) + "    ";
+        k = k + 1;
+    }
+}
+
+void exo3()
+{
+    for (int i = 0; i < 11; i++)
+    {
+        cout << to_string(i) + "    ";
+    }
+}
+
+void exo5()
+{
+    int k = 0;
+    cout << "Saisir un int : (svp) ";
+    cin >> k;
+    cout << endl;
+    for (int i = 0; i < k+1; i++)
+    {
+        cout << to_string(i) + "    ";
+    }
+}
+void AffichNPremiersEntiersNat (const unsigned & N, const char & Sep)
+{
+    for (unsigned int i = 0; i < N+1; i++)
+    {
+        cout << to_string(i) + Sep;
+    }
+}
+
+void exo6()
+{
+    unsigned int num = 0;
+    char charette;
+    cout << "Saisir un nombre : " << endl;
+    cin >> num;
+    cout << "Saisir un caractère : " << endl;
+    cin >> charette;
+    AffichNPremiersEntiersNat(num, charette);
+}
+
+void exo8()
+{
+    int a, b, c;
+    cout << "Saisir a : " << endl;
+    cin >> a;
+    cout << "Saisir b : " << endl;
+    cin >> b;
+    cout << "Saisir c : " << endl;
+    cin >> c;
+
+    float delta = b*b - 4*a*c;
+
+    if (delta > 0)
+    {
+        float x1 = ((-1)*b - sqrt(delta)/2*a);
+        float x2 = ((-1)*b + sqrt(delta)/2*a);
+        cout << "x1 = " + to_string(x1) << endl
+             << "x2 = " + to_string(x2) << endl;
+    }
+    else if(delta == 0)
+    {
+        float x1 = ((-1)*b/2*a);
+        cout << "x1 = " + to_string(x1) << endl;
+    }
+    else
+    {
+        cout << "Il n'y pas de solution dans les réels" << endl;
+    }
+
+}
+
+void exo9()
+{
+    int max = 10 ;
+    int min = 1;
+    int top1 = (rand() % max) + min;
+    while (true)
+    {
+        int guess;
+        cout << "Saisir un nombre entre " + to_string(min)+ " " + to_string(max) + " ";
+        cin >> guess;
+        if(guess == top1)
+        {
+            cout << "t'es chaud gg :D ! " << endl;
+            break ;
+        }
+        else
+        {
+            cout << "nop" << endl;
+            cout << to_string(top1);
+        }
+    }
+}
+
+void exo10()
+{
+    for (int i = 0 ; i < 98 ; i++)
+    {
+        string s1 = to_string (99-i) + " bottles";
+        string s2 = to_string (99-i-1) + " bottles";
+        switch (99-1)
+        {
+        case(1):
+            s1 = "1 bottle";
+            break;
+        case(0):
+            s1 = "no more";
+            break;
+        }
+        switch (99-i-1)
+        {
+        case(1):
+            s2 = "1 bottle";
+            break;
+        case(0):
+            s2 = "no more";
+            break;
+        case(-1):
+            s2 = "97575759 bottles";
+            break;
+        }
+
+        cout <<  s1 + " of beer on the wall, " + s1 + " of beer Take one down and pass it around, " << s2 + " of beer on the wall" << endl ;
+    }
+        cout << "1 bottle of beer on the wall, 1 bottle of beer" << endl << "Take one down and pass it around, no more bottles of beer on the wall" << endl ;
+        cout << "Go to the store and buy some more, 99 bottles of beer on the wall" ;
+}
+
+
+
+
+void exo7()
+{
+    while(true)
+    {
+        cout << endl
+             << "Choisi un des exercices  proposé : "
+             << endl
+             << "- 2. ex2" << endl
+             << "- 3. ex3" << endl
+             << "- 4. ex4" << endl
+             << "- 5. ex5" << endl
+             << "- 6. ex6" << endl
+             << "- 8. ex8" << endl
+             << "- 9. ex9" << endl
+             << endl
+             << "Saisi de la réponse : ";
+        int k;
+        cin >> k;
+        cout << endl;
+        switch(k)
+        {
+        case(2):
+            exo2();
+            break;
+        case(3):
+            exo3();
+            break;
+        case(4):
+            exo4();
+            break;
+        case(5):
+            exo5();
+            break;
+        case(6):
+            exo6();
+            break;
+        case (8):
+            exo8();
+            break;
+        case(9):
+            exo9();
+            break;
+        }
+    }
+}
+
+
+
+int main()
+{
+    exo2();
+    //exo3();
+    //exo4();
+    //exo5();
+    //exo6();
+    exo8();
+    return 0;
+}
+

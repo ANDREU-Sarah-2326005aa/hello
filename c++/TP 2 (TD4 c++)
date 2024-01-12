@@ -1,0 +1,155 @@
+#include <iostream>
+#include <cstdio>
+#include <cassert>
+#include <vector>
+#include <list>
+
+using namespace std;
+/* cours :
+
+- pour renvoyer un entier faut ecrire int et pas void
+
+- pour utiliser un assert : bibliotheque
+#include <cstdio>
+#include <cassert>
+assert (n > 8)
+
+- pour rentrer des paramètres in , la valeur ne doit pas pouvoir être modifié
+ex: exo 1
+si c des paramètres out pas besoin de const
+ex : exo
+
+- si un projet se ferme il faut ouvrir le .pro
+
+- vector <int> tabInt {1, 2, 3, 4, 5 }
+ex : exo testexo2
+
+- L'indice d'un tableau n'est pas int mais size_t
+ex : exo 3
+
+- un entier est codé sur 4 octets
+
+- ET_ALORS c'est &&
+
+- pour ajouter une valiable a la fin et l'enlever
+ex : exo 4
+tab.push_back(val);       tab.pop_back();
+
+-redimensionner un tableau :
+tab.resize(taille)
+*/
+
+
+// ------- exercice 1 --------
+
+int saisirEntierSupX1 (const string & saisie, const string & erreur, const int & x)
+{
+    int nbr ;
+    while (true)
+    {
+        cout << saisie << endl ;
+        cin >> nbr ;
+        if (x < nbr) break ;
+        cout << erreur << endl ;
+    }
+    return nbr ;
+}
+void testexo1 (){
+    int X = 10;
+    int n = saisirEntierSupX1 ("rentrer un nombre ", "nombre trop petit ", X) ;
+    assert (n > X);
+    cout << "L'exo 1 est bon !" << endl ;
+}
+
+// ------- exercice 2 --------
+
+int find2 (const int & val, const vector <int> & tabInt)
+{
+    int cpt  = 0 ;
+    while (tabInt[cpt] != val)
+    {
+        cpt +=1 ;
+    }
+    return cpt ;
+}
+void testexo2 ()
+{
+    vector <int> tabInt {1, 2, 3, 4, 5, 6, 10} ;
+    int position = find2(2 , tabInt) ;
+    assert (tabInt[position] == 2 ) ;
+    cout << "L'exo 2 est bon !" << endl ;
+
+}
+
+// ------- exercice 3 --------
+
+int find3 (const int & val, const vector <int> & tabInt)
+{
+    size_t cpt (0) ;
+    while (cpt < size(tabInt) && tabInt[cpt] != val)
+    {
+        cpt += 1 ;
+    }
+    return cpt ;
+}
+void testexo3 ()
+{
+    vector <int> tabInt {1, 2, 3, 4, 5, 6, 10} ;
+    int position = find3(9, tabInt) ;
+    int N = size(tabInt) ;
+    if (position == N)
+        assert (position == N ) ;
+    else
+        assert (tabInt[position] == 6 ) ;
+    cout << "L'exo 3 est bon !" << endl ;
+}
+
+// ------- exercice 4 --------
+
+int find4 (const int & val, vector <int> & tabInt)
+{
+    tabInt.push_back(val);
+    size_t cpt (0) ;
+    while (cpt < size(tabInt) && tabInt[cpt] != val)
+    {
+        cpt += 1 ;
+    }
+    tabInt.pop_back();
+    return cpt ;
+}
+
+void testexo4 ()
+{
+    vector <int> tabInt {1, 2, 3, 4, 5, 6, 10} ;
+    int position = find3(9, tabInt) ;
+    int N = size(tabInt) ;
+    if (position == N)
+        assert (position == N ) ;
+    else
+        assert (tabInt[position] == 6 ) ;
+    cout << "L'exo 4 est bon !" << endl ;
+}
+
+// ------- exercice 5 --------
+
+
+
+// ------- MAIN ---------
+
+int main()
+{
+    cout << "Hello Word!" << endl;
+    //testexo1() ;
+    //testexo2() ;
+    //testexo3() ;
+    testexo4() ;
+}
+
+
+void affichTab (const vector <int> & tab)
+{
+    for (size_t i = 0 ; i < tab.size() ; i =+1)
+        cout << tab[i] << '\t';
+    cout << endl ;
+}
+
